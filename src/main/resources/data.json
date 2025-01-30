@@ -1,0 +1,35 @@
+{
+    "B1": {
+        "rating": "7.1",
+        "year": " 2024",
+        "genres": "ужасы, фантастика, триллер",
+        "country": "Великобритания, США",
+        "duration": "1ч 59 мин",
+        "ageRating": "18+",
+        "videoUrl": "https://special-cherry.cdnmovies-stream.online/content/c2910304690ffc40943831ff9ec74abb/iframe"
+    },
+    "B2": {
+        "rating": "7.5",
+        "year": " 2020",
+        "genres": "комедия, приключения",
+        "country": "Великобритания",
+        "duration": "2 ч 10 мин",
+        "ageRating": "12+"
+    },
+    "B3": {
+        "rating": "8.2",
+        "year": " 2019",
+        "genres": "триллер, детектив",
+        "country": "Франция",
+        "duration": "1 ч 50 мин",
+        "ageRating": "16+"
+    },
+    "B4": {
+        "rating": "2.2",
+        "year": " 2005",
+        "genres": "Алё да",
+        "country": "Пися",
+        "duration": "1 ч 50 мин",
+        "ageRating": "16+"
+    }
+}

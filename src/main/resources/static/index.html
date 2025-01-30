@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Streaming Site</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+        }
+
+        img {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="tabs">
+    <a id="tab-movies" class="tab-text active">Фильмы</a>
+    <a id="tab-anime" class="tab-text">Аниме</a>
+    <a id="tab-forum" class="tab-text">Форум</a>
+</div>
+
+<div id="expandedCard" class="expanded-card">
+    <div class="modal-content">
+        <div class="image-container">
+            <img id="expandedImage" class="expanded-image" src="" alt="Expanded Image">
+            <div class="gradient-overlay"></div>
+        </div>
+        <div class="description">
+            <h1 id="expandedTitle"></h1>
+            <div id="additionalInfo"></div>
+            <div id="filmDescription"></div>
+        </div>
+        <button class="play-btn" onclick="playMovie()">Смотреть</button>
+        <button class="add-btn" onclick="addToCollection(this)">❤</button>
+        <div class="close" onclick="closeCard()">&times;</div>
+    </div>
+</div>
+<header>
+    <div class="logo" id="logo">
+        <img src="/images/logo.png" alt="logo">
+    </div>
+    <div class="avatar">
+        <img src="/images/avatar.png" alt="User Avatar">
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search anything" id="search-input">
+        <button id="ai-toggle-button" class="ai-toggle-button">
+            <img src="/images/switch.png" alt="AI Toggle">
+        </button>
+    </div>
+</header>
+<main>
+    <section id="section-movies" class="tab-content active">
+        <section class="main-film">
+            <video autoplay loop muted playsinline disablePictureInPicture>
+                <source src="/film_images/A0.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </section>
+        <section class="re-films">
+            <h2>Продолжить просмотр</h2>
+            <div class="carousel">
+                <div class="film-card small" data-film-id="A1">
+                    <img src="/film_images/a1.jpg" alt="A1" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A2">
+                    <img src="/film_images/a2.jpg" alt="A2" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A3">
+                    <img src="/film_images/a3.jpg" alt="A3" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A4">
+                    <img src="/film_images/a4.jpg" alt="A4" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A5">
+                    <img src="/film_images/a5.jpg" alt="A5" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A6">
+                    <img src="/film_images/a6.jpg" alt="A6" class="film-image">
+                </div>
+            </div>
+        </section>
+        <section class="popular-films" id="movies-recommendations">
+            <h2>Рекомендации</h2>
+            <div class="recommendations">
+                <div class="film-card large" data-film-id="B1" onclick="expandCard(this, 'B1')">
+                    <img src="/film_images/b1.jpg" alt="b1" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="B2" onclick="expandCard(this, 'B2')">
+                    <img src="/film_images/b2.jpg" alt="b2" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="B3" onclick="expandCard(this, 'B3')">
+                    <img src="/film_images/b3.jpg" alt="b3" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="B4" onclick="expandCard(this, 'B4')">
+                    <img src="/film_images/b4.jpg" alt="b4" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="B5" onclick="expandCard(this, 'B5')">
+                    <img src="/film_images/b5.jpg" alt="b5" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="B6" onclick="expandCard(this, 'B6')">
+                    <img src="/film_images/b6.jpg" alt="b6" class="film-image">
+                    <div class="film-overlay">
+                        <div class="film-title"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section id="section-anime" class="tab-content">
+        <section class="main-film">
+            <video autoplay loop muted playsinline disablePictureInPicture>
+                <source src="/anime_images/c0.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </section>
+        <section class="re-films">
+            <h2>Продолжить просмотр</h2>
+            <div class="carousel">
+                <div class="film-card small" data-film-id="A1">
+                    <img src="/film_images/a1.jpg" alt="A1" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A2">
+                    <img src="/film_images/a2.jpg" alt="A2" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A3">
+                    <img src="/film_images/a3.jpg" alt="A3" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A4">
+                    <img src="/film_images/a4.jpg" alt="A4" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A5">
+                    <img src="/film_images/a5.jpg" alt="A5" class="film-image">
+                </div>
+                <div class="film-card small" data-film-id="A6">
+                    <img src="/film_images/a6.jpg" alt="A6" class="film-image">
+                </div>
+            </div>
+        </section>
+        <section class="popular-films" id="anime-recommendations">
+            <h2>Рекомендации по аниме</h2>
+            <div class="recommendations">
+                <div class="film-card large" data-film-id="C1" onclick="expandCard(this, 'C1')">
+                    <img src="/anime_images/c1.jpg" alt="C1" class="film-image">
+                    <div class="film-overlay">
+                        <div class="anime-title"></div>
+                    </div>
+                </div>
+                <div class="film-card large" data-film-id="C2" onclick="expandCard(this, 'C2')">
+                    <img src="/anime_images/c2.jpg" alt="C2" class="film-image">
+                    <div class="film-overlay">
+                        <div class="anime-title"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section id="section-forum" class="tab-content">
+        <div class="forum-placeholder">
+            <h2>Форум</h2>
+            <p></p>
+        </div>
+    </section>
+</main>
+<div id="modal-overlay" class="modal-overlay"></div>
+
+<script src="/js/expjs.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>

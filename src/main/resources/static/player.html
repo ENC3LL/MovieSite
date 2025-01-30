@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Проигрыватель</title>
+    <style>
+        body, html {
+            margin: 0;
+            background-color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            height: 100%;
+        }
+        #videoContainer {
+            width: 100%;
+            height: 80vh;
+        }
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+<div id="videoContainer"></div>
+<button class="back-button" onclick="goBack()">Назад</button>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    // Получаем filmId из параметров URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const filmId = urlParams.get('filmId');
+
+    if (!filmId) {
+        alert('Фильм не выбран');
+    } else {
+        // Загрузка данных из data.json
+        fetch('/data.json')
+            .then(response => response.json())
+            .then(data => {
+                const filmData = data[filmId];
+                if (filmData && filmData.videoUrl) {
+                    const videoUrl = filmData.videoUrl;
+                    const videoContainer = document.getElementById('videoContainer');
+
+                    // Создаем iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = videoUrl;
+                    iframe.width = '1800px';
+                    iframe.height = '720px';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.frameBorder = '0';
+
+                    // Добавляем iframe в контейнер
+                    videoContainer.appendChild(iframe);
+                } else {
+                    alert('Видео для выбранного фильма не найдено');
+                }
+            })
+            .catch(error => console.error('Ошибка при загрузке данных:', error));
+    }
+</script>
+</body>
+</html>

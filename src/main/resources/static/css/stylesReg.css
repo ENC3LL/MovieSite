@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    position: absolute;
+    top: -200px; /* Поднимаем логотип над контейнером */
+    z-index: 2;
+}
+
+.logo img {
+    width: 200px;
+    height: 200px;
+}
+
+.container {
+    top: 50px;
+    background-color: #1c1c1c;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    z-index: 1;
+}
+
+.form-header {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.form-header span {
+    cursor: pointer;
+    color: #999;
+}
+
+.form-header .active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #fff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 25px;
+    background-color: #333;
+    color: #999;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #999;
+    opacity: 0.8;
+}
+
+/* Стили для поля с ошибкой */
+input.error {
+    border-color: #FF0000; /* Красная рамка */
+    color: #FF0000; /* Красный текст */
+}
+
+/* Стили для текста внутри поля с ошибкой */
+input.error::placeholder {
+    color: #FF0000; /* Красный текст для placeholder */
+    opacity: 1; /* Делаем текст полностью видимым */
+}
+
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #ff00ff, #ff0080);
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.98);
+}

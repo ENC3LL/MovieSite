@@ -1,0 +1,488 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css'); 
+
+body, html {
+    margin: 0;
+    font-family: 'Comfortaa', serif;
+    background: #080808; 
+    color: white;
+    overflow-x: hidden;
+    overflow: auto;
+    -ms-overflow-style: none;  /* Для IE и Edge */
+    scrollbar-width: none;  /* Для Firefox */
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Более темный фон */
+    z-index: 999; /* Должен быть меньше, чем у расширенной карточки */
+    display: none; /* По умолчанию скрыт */
+}
+
+.modal-overlay.active {
+    display: block;
+}
+
+.no-scroll {
+    overflow: hidden !important;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    position: relative;
+    width: 100%;
+}
+.logo {
+    position: absolute;
+    top: 30px; 
+    left: 30px;
+    z-index: 2;
+    width: 60px; /* Установите ширину родительского элемента */
+    height: 60px; /* Установите высоту родительского элемента */
+    overflow: hidden; /* Скрывает содержимое за пределами родительского элемента */
+    cursor: pointer; /* Добавлено свойство курсора */
+
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: auto; /* Разрешаем события указателя */
+}
+
+.avatar {
+    position: absolute;
+    top: 30px; 
+    right: 30px;
+    z-index: 2;
+    width: 50px; /* Установите ширину родительского элемента */
+    height: 50px; /* Установите высоту родительского элемента */
+    border-radius: 50%; /* Округлите края родительского элемента */
+    overflow: hidden; /* Скрывает содержимое за пределами родительского элемента */
+    border: 1px solid rgb(80, 80, 80); /* Граница для визуализации */
+}
+
+.avatar img {
+    width: 100%; /* Ширина изображения 100% от родительского элемента */
+    height: 100%; /* Высота изображения 100% от родительского элемента */
+    object-fit: cover; /* Масштабирует изображение, чтобы заполнить область, сохраняя пропорции */
+}
+
+.section-navigation {
+    display: flex;
+    justify-content: center;
+    position: absolute; /* Держим абсолютное позиционирование */
+    top: 10px; /* Позиционирование кнопок */
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: transparent; /* Убедитесь, что фон прозрачен */
+    margin: 0; /* Уберите возможные внешние отступы */
+    padding: 0; /* Уберите возможные внутренние отступы */
+}
+
+.section-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 10px; /* Расстояние между элементами */
+}
+
+.section-navigation ul li {
+    margin: 0;
+}
+
+.section-navigation ul li a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #FFFFFF;
+    font-weight: 600;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+/* Стили для контейнера поиска */
+.search-bar {
+    position: relative; /* Установите относительное позиционирование */
+    position: absolute;
+    top: 730px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 2;
+}
+
+/* Стили для поля ввода */
+.search-bar input {
+    width: 600px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* Стили для кнопки переключения */
+.ai-toggle-button {
+    position: absolute; /* Абсолютное позиционирование */
+    right: 10px; /* Отступ от правого края контейнера */
+    top: 55%;
+    transform: translateY(-50%); /* Центрирование по вертикали */
+    border: none;
+    background: transparent; /* Прозрачный фон */
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* Стили для изображения внутри кнопки */
+.ai-toggle-button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+
+.main-film {
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 780px;
+    object-fit: cover;
+}
+
+.main-film video {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 10;
+    padding: 0;
+    vertical-align: baseline;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    pointer-events: none;
+    background-color: transparent;
+}
+
+.re-films, .popular-films {
+    margin-bottom: 0px;
+    padding: 0 20px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.film-card {
+    flex: 0 0 auto;
+    margin: 20px; /* Уменьшение отступов между карточками */
+    position: relative;
+    background: #1c1c1e; /* Более насыщенный темный фон */
+    border: none; /* Убираем границу */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8); /* Глубокая тень */
+    border-radius: 20px; /* Более округленные углы */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+}
+
+.film-card:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8); /* Увеличение тени при наведении */
+    transform: translateY(-10px); /* Подъем карточки при наведении */
+}
+
+.film-overlay {
+    position: absolute;
+    bottom: -10%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 4;
+}
+
+.film-card:hover .film-overlay {
+    opacity: 1;
+}
+
+.film-title {
+    bottom: -20%;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 5;
+}
+
+.anime-title {
+    bottom: -20%;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 5;
+}
+
+.film-card .film-title {
+    position: relative;
+    z-index: 5; /* Убедитесь, что текст находится выше изображения */
+    margin: 10px; /* Добавьте отступы для проверки */
+    text-align: center; /* Центрируйте текст */
+}
+
+.film-card .anime-title {
+    position: relative;
+    z-index: 5; /* Убедитесь, что текст находится выше изображения */
+    margin: 10px; /* Добавьте отступы для проверки */
+    text-align: center; /* Центрируйте текст */
+}
+
+.film-card.small {
+    width: 320px;
+    height: 180px;
+}
+
+.film-card.large {
+    width: 250px; /* Ширина карточки */
+    height: 350px; /* Высота карточки */
+    border-radius: 20px; /* Углы карточки */
+    overflow: hidden; /* Скрывает содержимое за рамкой */
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+
+.film-card.large:hover {
+    transform: scale(1.05);
+  }
+
+.film-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обеспечивает заполнение карточки изображением */
+    border-radius: inherit; /* Радиус совпадает с радиусом карточки */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.film-card.large .film-image {
+    border-radius: 20px; /* Следует радиусу карточки */
+}
+
+.recommendations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Карточки идут по порядку */
+    gap: 20px; /* Уменьшение отступов между карточками */
+    padding: 10px; /* Уменьшение отступов внутри контейнера */
+}
+
+.tabs {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    top: 20px; /* Позиционирование по вертикали */
+    left: 50%; /* Позиционирование по горизонтали */
+    transform: translateX(-50%); /* Центрирование элемента по горизонтали */
+    z-index: 2;
+}
+
+.tab-text {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tab-text:hover {
+    color: #00ffff; /* Change color on hover */
+}
+
+.tab-text.active {
+    font-weight: bold;
+    border-bottom: 2px solid white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.popular-films {
+    display: none;
+}
+
+.popular-films.active {
+    display: block;
+}
+
+.expanded-card {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.877); /* Фон карточки прозрачный */
+    border-radius: 20px;
+    transition: all 0.1s cubic-bezier(0.4, 0.0, 0.2, 1);
+    overflow: hidden;
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  
+}
+
+.expanded-card.active {
+    visibility: visible;
+    opacity: 1;
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.expanded-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+}
+
+.description {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.5;
+    background: transparent;
+    z-index: 2;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE и Edge */
+    scrollbar-width: none;  
+}
+
+#additionalInfo {
+    color: #bbbbbb; /* Немного серый цвет */
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+/* Стили для кнопки "Смотреть" */
+.play-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 75%; /* Располагаем кнопку в правой части карточки */
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #222, #383838);
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Стили для кнопки закрытия */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 3;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Стили для кнопки "+" */
+.add-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 85%; /* Расположите кнопку рядом с кнопкой "Смотреть" */
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #222, #383838);
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+    margin-left: 20px;
+}
+
+.add-btn.clicked {
+    background: linear-gradient(90deg, #e100ff, #00ffff) !important;
+}
+
+.rating-high {
+    color: #10e417; /* Зелёный цвет */
+    font-weight: bold;
+}
+
+.rating-medium {
+    color: #e7e40e; /* Жёлтый цвет */
+    font-weight: bold;
+}
+
+.rating-low {
+    color: #df1c0e; /* Красный цвет */
+    font-weight: bold;
+}
